@@ -13,21 +13,27 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:gitee" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dbab899-cea3-49c7-9727-b323ed91d004" name="默认的" comment="整理项目文件夹">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +95,7 @@
     <property name="project.structure.proportion" value="0.14941406" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -153,7 +159,7 @@
       <workItem from="1591539680174" duration="14000" />
       <workItem from="1591539858083" duration="139000" />
       <workItem from="1591540030559" duration="43000" />
-      <workItem from="1591542206569" duration="5167000" />
+      <workItem from="1591542206569" duration="5818000" />
     </task>
     <task id="LOCAL-00001" summary="实现校园网一键登录, 开机自启">
       <created>1591457179922</created>
@@ -225,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591546446626</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="整理项目文件夹">
+      <created>1591547436604</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1591547436604</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -234,12 +247,17 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -274,14 +292,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="445" y="55" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1591514773245" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591547916931">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591547916931" />
     <state x="249" y="0" key="#项目结构" timestamp="1591456618288">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="#项目结构/0.0.1536.824@0.0.1536.824" timestamp="1591456618288" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1591546349546">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1591547933617">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1591546349546" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1591547933617" />
     <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1591543590569">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -290,26 +312,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="628" y="309" width="374" height="205" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1591457219354" />
-    <state width="1493" height="99" key="GridCell.Tab.0.bottom" timestamp="1591546948210">
+    <state width="1493" height="187" key="GridCell.Tab.0.bottom" timestamp="1591547940673">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="99" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591546948210" />
-    <state width="1493" height="99" key="GridCell.Tab.0.center" timestamp="1591546948210">
+    <state width="1493" height="187" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
+    <state width="1493" height="187" key="GridCell.Tab.0.center" timestamp="1591547940673">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="99" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591546948210" />
-    <state width="1493" height="99" key="GridCell.Tab.0.left" timestamp="1591546948210">
+    <state width="1493" height="187" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
+    <state width="1493" height="187" key="GridCell.Tab.0.left" timestamp="1591547940673">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="99" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591546948210" />
-    <state width="1493" height="99" key="GridCell.Tab.0.right" timestamp="1591546948210">
+    <state width="1493" height="187" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
+    <state width="1493" height="187" key="GridCell.Tab.0.right" timestamp="1591547940673">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="99" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591546948210" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1591456881459">
+    <state width="1493" height="187" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1591547770819">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591456881459" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591547770819" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1591546352695">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
