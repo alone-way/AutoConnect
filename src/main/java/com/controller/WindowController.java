@@ -8,18 +8,23 @@ import com.model.service.LoginTask;
 import com.model.service.LogoutService;
 import com.model.service.LogoutTask;
 import com.model.util.SystemUtil;
-import com.trolltech.qt.gui.QApplication;
+import com.trolltech.qt.core.QModelIndex;
+import com.trolltech.qt.core.QObject;
+import com.trolltech.qt.gui.*;
+import com.view.ComboItemWidget;
 import com.view.LoginWindow;
 import com.view.Ui_LoginWindow;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author HRH
  * @version 1.0
  * @date 2020/5/24 21:19
  */
-public class WindowController  {
+public class WindowController extends QObject {
     private LoginWindow loginWindow = new LoginWindow();
     private LoginService loginService = new LoginService();
     private LogoutService logoutService = new LogoutService();
@@ -30,11 +35,30 @@ public class WindowController  {
         Ui_LoginWindow ui = loginWindow.getUi();
         //加载登录信息
         loadLoginData();
-        ui.combo_password.lineEdit().returnPressed.connect(ui.pb_Login, "click()");
-//        ui.le_password.returnPressed.connect(ui.pb_Login, "click()");
+//        ui.combo_password.lineEdit().returnPressed.connect(ui.pb_Login, "click()");
         ui.pb_Login.clicked.connect(this, "login()");
         ui.pb_logout.clicked.connect(this, "logout()");
         ui.cb_autoStart.toggled.connect(this, "toggled_on_cb_autoStart(boolean)");
+//        ui.combo_id.currentIndexChanged.connect(this, "currentIndexChanged_on_combo_id(int)");
+        ui.combo_id.activatedIndex.connect(this, "activatedIndex_on_combo_id(int)");
+        QListWidget listWidget = loginWindow.getListWidget();
+
+    }
+
+    /**
+     * 根据选择的索引 显示 账户/密码/运营商
+     */
+    public void activatedIndex_on_combo_id(int index) {
+        Ui_LoginWindow ui = loginWindow.getUi();
+        QListWidget listWidget = loginWindow.getListWidget();
+
+        //获得widget
+        QListWidgetItem item = listWidget.item(index);
+        ComboItemWidget widget = (ComboItemWidget) listWidget.itemWidget(item);
+        //设置账户/密码/运营商
+        ui.combo_id.setEditText(widget.getText());
+        ui.le_password.setText(widget.getLogin().getPassword());
+        ui.combo_isp.setCurrentIndex(widget.getLogin().getIspIndex());
     }
 
     /**
@@ -42,22 +66,28 @@ public class WindowController  {
      */
     public void loadLoginData() {
         Ui_LoginWindow ui = loginWindow.getUi();
+        QListWidget listWidget = loginWindow.getListWidget();
         try (ObjectInputStream in =
                      new ObjectInputStream(new BufferedInputStream(new FileInputStream("loginData.txt")));) {
             //设置窗口信息
             ui.cb_autoLogin.setChecked(in.readBoolean());
             ui.cb_autoStart.setChecked(in.readBoolean());
-            ui.combo_isp.setCurrentIndex(in.readInt());
 
-            //添加账号和密码
-            Object obj;
-            Login login;
-            int index = 0;
-            while ((obj = (Login) in.readObject()) != null) {
-                login = (Login) obj;
-                ui.combo_id.setItemText(index, login.getId());
-                ui.combo_password.setItemText(index, login.getPassword());
-                index++;
+            boolean isFirst = true;
+            //读取登录账户信息
+            List<Login> loginList = (List<Login>) in.readObject();
+            for (Login login : loginList) {
+                QListWidgetItem item = new QListWidgetItem(listWidget);
+                ComboItemWidget widget = new ComboItemWidget(login, listWidget);
+                listWidget.setItemWidget(item, widget);
+                widget.getPb_delete().clicked.connect(this, "clicked_on_pb_delete()");
+                //将读取到的第一个账户的信息显示到窗口上
+                if (isFirst) {
+                    ui.combo_id.setEditText(login.getId());
+                    ui.le_password.setText(login.getPassword());
+                    ui.combo_isp.setCurrentIndex(login.getIspIndex());
+                    isFirst = false;
+                }
             }
 
         } catch (FileNotFoundException e) {
@@ -67,6 +97,7 @@ public class WindowController  {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -74,39 +105,99 @@ public class WindowController  {
      */
     public void saveLoginData() {
         Ui_LoginWindow ui = loginWindow.getUi();
-        //将当前的账号密码移到顶端
-//        int currentIndex = ui.combo_id.currentIndex();
-//        ui.combo_id.insertItem(0, ui.combo_id.itemText(currentIndex));
-//        ui.combo_password.insertItem(0, ui.combo_password.itemText(currentIndex));
-//        currentIndex = ui.combo_id.currentIndex();
-//        ui.combo_id.removeItem(currentIndex);
-//        ui.combo_password.removeItem(currentIndex);
-//        ui.combo_id.setCurrentIndex(0);
+        QListWidget listWidget = loginWindow.getListWidget();
 
         try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(
                 "loginData.txt")));) {
             //保存窗口信息
             out.writeBoolean(ui.cb_autoLogin.isChecked());
             out.writeBoolean(ui.cb_autoStart.isChecked());
-            out.writeInt(ui.combo_isp.currentIndex());
 
-            //保存账号密码
-            Login login;
-            int index = 0;
-            while (index < ui.combo_id.count()) {
-                login = new Login();
-                login.setId(ui.combo_id.itemText(index));
-                login.setPassword(ui.combo_password.itemText(index));
-                out.writeObject(login);
-                index++;
+            if (!ui.combo_id.currentText().isEmpty() && !ui.le_password.text().isEmpty()) {
+                //将最近一次登录的账户移到listWidget的第0行
+                String curId = ui.combo_id.currentText();
+                boolean isFind = false;
+                for (int i = 0; i < listWidget.count() && !isFind; i++) {
+                    QListWidgetItem curItem = listWidget.item(i);
+                    ComboItemWidget curWidget = (ComboItemWidget) listWidget.itemWidget(curItem);
+                    Login curLogin = curWidget.getLogin();
+
+                    if (curLogin.getId().equals(curId)) {
+                        curLogin.setPassword(ui.le_password.text());
+                        curLogin.setIspByIndex(ui.combo_isp.currentIndex());
+                        //交换curWidget和firstWidget的login
+                        ComboItemWidget firstWidget = (ComboItemWidget) listWidget.itemWidget(listWidget.item(0));
+                        Login tmp = firstWidget.getLogin();
+                        firstWidget.setLogin(curLogin);
+                        curWidget.setLogin(tmp);
+                        isFind = true;
+                    }
+                }
+                //若最近一次登录的账户并不存在于listWidget中
+                //说明是新账户, 将新账户插入到listWidget的第0行
+                if (!isFind) {
+                    Login login = new Login();
+                    login.setId(ui.combo_id.currentText());
+                    login.setPassword(ui.le_password.text());
+                    login.setIspByIndex(ui.combo_isp.currentIndex());
+                    QListWidgetItem item = new QListWidgetItem(listWidget);
+                    ComboItemWidget widget = new ComboItemWidget(login, loginWindow);
+                    widget.getPb_delete().clicked.connect(this, "clicked_on_pb_delete()");
+
+                    //先将新账户插入最后一行
+                    listWidget.setItemWidget(item, widget);
+                    ComboItemWidget firstWidget = (ComboItemWidget) listWidget.itemWidget(listWidget.item(0));
+                    ComboItemWidget lastWidget =
+                            (ComboItemWidget) listWidget.itemWidget(listWidget.item(listWidget.count() - 1));
+                    //交换第0行和最后一行的login
+                    Login tmp = firstWidget.getLogin();
+                    firstWidget.setLogin(lastWidget.getLogin());
+                    lastWidget.setLogin(tmp);
+
+                    ui.combo_id.setEditText(firstWidget.getText());
+                }
             }
-            out.writeObject(null);
+
+            //按顺序保存账号密码
+            List<Login> loginList = new ArrayList<>();
+            for (int i = 0; i < listWidget.count(); i++) {
+                QListWidgetItem item = listWidget.item(i);
+                ComboItemWidget widget = (ComboItemWidget) listWidget.itemWidget(item);
+                Login login = widget.getLogin();
+                loginList.add(login);
+            }
+            out.writeObject(loginList);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
+    /**
+     * 根据被点击的按钮来删除listWidget中指定的item, 并清空密码
+     */
+    public void clicked_on_pb_delete() {
+        System.out.println("激活");
+        Ui_LoginWindow ui = loginWindow.getUi();
+        QListWidget listWidget = loginWindow.getListWidget();
+
+        QPushButton pb_delete = (QPushButton) signalSender();
+        ComboItemWidget curWidget = (ComboItemWidget) pb_delete.parent();
+
+        //在listWidget中找到curWidget, 并删除对应的item
+        for (int i = 0; i < listWidget.count(); i++) {
+            QListWidgetItem item = listWidget.item(i);
+            QWidget findWidget = listWidget.itemWidget(item);
+            if (curWidget == findWidget) {
+                listWidget.takeItem(i);
+                ui.le_password.clear();
+                ui.combo_isp.setCurrentIndex(0);
+            }
+        }
+
+        saveLoginData();
+    }
+
 
     /**
      * 开启或关闭开机自启
@@ -130,33 +221,20 @@ public class WindowController  {
      */
     public void login() {
         Ui_LoginWindow ui = loginWindow.getUi();
-
+        if (ui.combo_isp.currentIndex() == 0) {
+            loginWindow.showMessage("请选择运营商!", "");
+            return;
+        }
         ui.pb_Login.setText("登录中...");
         ui.pb_Login.setEnabled(false);
 
         String id = ui.combo_id.currentText();
-        String password = ui.combo_password.currentText();
-        String isp = "";
-        switch (ui.combo_isp.currentIndex()) {
-            case 1:
-                isp = Login.CHINA_TELECOM;
-                break;
-            case 2:
-                isp = Login.CHINA_MOBILE;
-                break;
-            case 3:
-                isp = Login.CHINA_UNICOM;
-                break;
-            case 4:
-                isp = Login.BINJIANG_COLLEGE;
-                break;
-            default:
-                loginWindow.showMessage("请选择运营商!", "");
-                loginWindow.getUi().pb_Login.setText("登录");
-                loginWindow.getUi().pb_Login.setEnabled(true);
-                return;
-        }
-        Login login = new Login(id, password, isp);
+        String password = ui.le_password.text();
+        int ispIndex = ui.combo_isp.currentIndex();
+        Login login = new Login();
+        login.setId(id);
+        login.setPassword(password);
+        login.setIspByIndex(ispIndex);
 
 //        System.out.println(login);
 

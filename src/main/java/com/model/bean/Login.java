@@ -7,11 +7,11 @@ import java.io.Serializable;
  * @version 1.0
  * @date 2020/5/23 18:10
  */
-public class Login implements Serializable{
+public class Login implements Serializable {
     private static final long serialVersionUID = 5809782578272943999L;
-    private String id;
-    private String password;
-    private String isp;
+    private String id = "";
+    private String password = "";
+    private String isp = "";
 
     public static final String BINJIANG_COLLEGE = "";
     public static final String CHINA_MOBILE = "@cmcc";
@@ -58,5 +58,41 @@ public class Login implements Serializable{
 
     public void setIsp(String isp) {
         this.isp = isp;
+    }
+
+    public void setIspByIndex(int index) {
+        switch (index) {
+            case 1:
+                isp = CHINA_TELECOM;
+                break;
+            case 2:
+                isp = CHINA_MOBILE;
+                break;
+            case 3:
+                isp = CHINA_UNICOM;
+                break;
+            case 4:
+                isp = BINJIANG_COLLEGE;
+                break;
+            default:
+                isp = null;
+        }
+    }
+
+    public int getIspIndex() {
+        if (isp == null || isp.equals(""))
+            return 0;
+        switch (isp) {
+            case CHINA_TELECOM:
+                return 1;
+            case CHINA_MOBILE:
+                return 2;
+            case CHINA_UNICOM:
+                return 3;
+            case BINJIANG_COLLEGE:
+                return 4;
+            default:
+                return 0;
+        }
     }
 }
