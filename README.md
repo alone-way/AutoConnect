@@ -2,6 +2,12 @@
 
 
 
+## 下载
+
+[AutoConnect](https://gitee.com/iIceCube/AutoConnect/attach_files/410102/download)
+
+
+
 ## 介绍
 
 AutoConnect是一款可以实现开机自动登录校园网的应用。避免了连接WLAN后再在浏览器登录的繁琐操作，并且还能注销当前登录的账户，实现多账号切换， 满足换号登录的需求。
@@ -9,10 +15,6 @@ AutoConnect是一款可以实现开机自动登录校园网的应用。避免了
 
 
 ![image-20200607211034894](https://gitee.com/iIceCube/Images/raw/master/img/20200607211043.png)
-
-
-
-## 下载
 
 
 
