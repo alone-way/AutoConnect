@@ -6,7 +6,7 @@
 
     <groupId>com.icecube</groupId>
     <artifactId>AutoConnect</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
@@ -30,16 +30,16 @@
     </dependencies>
 
     <build>
-<!--        <resources>-->
-<!--            <resource>-->
-<!--                <directory>${basedir}/src/main/resources</directory>-->
-<!--                <filtering>true</filtering>-->
-<!--                <excludes>-->
-<!--                    <exclude>*.*</exclude>-->
-<!--                    <exclude>images/*.*</exclude>-->
-<!--                </excludes>-->
-<!--            </resource>-->
-<!--        </resources>-->
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>*.*</exclude>
+                    <exclude>images/*.*</exclude>
+                </excludes>
+            </resource>
+        </resources>
 
         <plugins>
             <plugin>
