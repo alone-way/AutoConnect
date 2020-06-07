@@ -177,7 +177,6 @@ public class WindowController extends QObject {
      * 根据被点击的按钮来删除listWidget中指定的item, 并清空密码
      */
     public void clicked_on_pb_delete() {
-        System.out.println("激活");
         Ui_LoginWindow ui = loginWindow.getUi();
         QListWidget listWidget = loginWindow.getListWidget();
 

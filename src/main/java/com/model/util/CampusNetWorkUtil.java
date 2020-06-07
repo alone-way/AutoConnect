@@ -30,7 +30,7 @@ public class CampusNetWorkUtil {
         if (instance.get(Calendar.HOUR_OF_DAY) < 8) {
             isNormalTime = false;
         }
-        if ((instance.get(Calendar.DAY_OF_WEEK) < 7)) {
+        if ((instance.get(Calendar.DAY_OF_WEEK) < 6)) {
             if (instance.get(Calendar.HOUR_OF_DAY) >= 23) {
                 isNormalTime = false;
             }
@@ -125,7 +125,8 @@ public class CampusNetWorkUtil {
             e.printStackTrace();
         }
         params.put("wlanacip", "10.1.1.1");
-        params.put("wlanacname", "%26%23230%3B%26%23187%3B%A1%A7%26%23230%3B%A1%C0%26%23159%3B%26%23229%3B-|%A8%A6%26%23153%3B%A1%E9%26%23230%3B%A6%CC%26%23139%3B%A8%A8%A1%A5%26%23149%3B");
+        params.put("wlanacname", "%26%23230%3B%26%23187%3B%A1%A7%26%23230%3B%A1%C0%26%23159%3B%26%23229%3B-|%A8%A6%26" +
+                "%23153%3B%A1%E9%26%23230%3B%A6%CC%26%23139%3B%A8%A8%A1%A5%26%23149%3B");
         params.put("port", null);
         params.put("hostname", "10.1.99.100");
         params.put("iTermType", "1");
