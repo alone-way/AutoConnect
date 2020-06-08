@@ -4,7 +4,7 @@
 
 ## 下载
 
-[AutoConnect-1.1](https://gitee.com/iIceCube/AutoConnect/attach_files/410177/download)
+[AutoConnect-1.1.1](https://gitee.com/iIceCube/AutoConnect/attach_files/410456/download)
 
 
 
@@ -45,3 +45,15 @@ AutoConnect是一款可以实现开机自动登录校园网的应用。避免了
 * 若要连无线网，请保持WLAN开关开启, 否则无法登录
 * 不要使用管理员身份打开应用, 否则开机自启功能失效
 * 安装路径不要包含中文和空格, 否则可能出现不可预知错误
+
+
+
+## 更新日志
+
+#### v1.1.1
+
+* 修正i-bjxy重复连接
+
+#### v1.1
+
+* 修正断网时间的错误
