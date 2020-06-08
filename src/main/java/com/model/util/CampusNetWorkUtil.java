@@ -161,7 +161,7 @@ public class CampusNetWorkUtil {
 //                        System.out.println(wifiName);
                         if (SSID.equals(wifiName)) {
 //                            System.out.println("wifi已连接");
-                            return new Message(false, "wifi连接成功!", "");
+                            return new Message(true, "wifi连接成功!", "");
                         }
                     }
                 }
