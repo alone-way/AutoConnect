@@ -24,16 +24,15 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dbab899-cea3-49c7-9727-b323ed91d004" name="默认的" comment="整理项目文件夹">
+    <list default="true" id="3dbab899-cea3-49c7-9727-b323ed91d004" name="默认的" comment="加入了对POST失败的检测, 避免无法登录时等待时间过长">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +47,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="gitee/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--follow-tags" />
@@ -90,7 +102,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/install" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.14941406" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -106,15 +119,7 @@
       <recent name="D:\OneDrive\Java\JavaCode\AutoConnect\src\main\java" />
     </key>
   </component>
-  <component name="RunAnythingCache">
-    <myKeys>
-      <visibility group="Gradle tasks" flag="true" />
-      <visibility group="Maven goals" flag="true" />
-      <visibility group="Recent projects" flag="true" />
-      <visibility group="Run configurations" flag="true" />
-    </myKeys>
-  </component>
-  <component name="RunManager" selected="应用程序.StartMain">
+  <component name="RunManager" selected="Application.StartMain">
     <configuration name="TestMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.start.TestMain" />
       <module name="AutoConnect" />
@@ -130,14 +135,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="应用程序.StartMain" />
-      <item itemvalue="应用程序.TestMain" />
+      <item itemvalue="Application.StartMain" />
+      <item itemvalue="Application.TestMain" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="应用程序.TestMain" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -159,7 +159,12 @@
       <workItem from="1591539680174" duration="14000" />
       <workItem from="1591539858083" duration="139000" />
       <workItem from="1591540030559" duration="43000" />
-      <workItem from="1591542206569" duration="5818000" />
+      <workItem from="1591542206569" duration="7066000" />
+      <workItem from="1591549392108" duration="310000" />
+      <workItem from="1591590199874" duration="1646000" />
+      <workItem from="1591602814455" duration="828000" />
+      <workItem from="1591612441017" duration="12000" />
+      <workItem from="1591691234634" duration="2340000" />
     </task>
     <task id="LOCAL-00001" summary="实现校园网一键登录, 开机自启">
       <created>1591457179922</created>
@@ -238,7 +243,28 @@
       <option name="project" value="LOCAL" />
       <updated>1591547436604</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="修正i-bjxy重复连接">
+      <created>1591590410716</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1591590410716</updated>
+    </task>
+    <task id="LOCAL-00013" summary="更新了日志">
+      <created>1591591423377</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1591591423377</updated>
+    </task>
+    <task id="LOCAL-00014" summary="加入了对POST失败的检测, 避免无法登录时等待时间过长">
+      <created>1591693106078</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1591693106078</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -257,7 +283,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -277,7 +303,10 @@
     <MESSAGE value="修正断网时间的错误" />
     <MESSAGE value="更新readme.md" />
     <MESSAGE value="整理项目文件夹" />
-    <option name="LAST_COMMIT_MESSAGE" value="整理项目文件夹" />
+    <MESSAGE value="修正i-bjxy重复连接" />
+    <MESSAGE value="更新了日志" />
+    <MESSAGE value="加入了对POST失败的检测, 避免无法登录时等待时间过长" />
+    <option name="LAST_COMMIT_MESSAGE" value="加入了对POST失败的检测, 避免无法登录时等待时间过长" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591508924204">
@@ -300,46 +329,50 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="#项目结构/0.0.1536.824@0.0.1536.824" timestamp="1591456618288" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1591547933617">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1591693563641">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1591547933617" />
-    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1591543590569">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1591693563641" />
+    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1591612450492">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591543590569" />
+    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591612450492" />
     <state x="628" y="309" width="374" height="205" key="Github.ShareDialog" timestamp="1591457219354">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="628" y="309" width="374" height="205" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1591457219354" />
-    <state width="1493" height="187" key="GridCell.Tab.0.bottom" timestamp="1591547940673">
+    <state width="1493" height="187" key="GridCell.Tab.0.bottom" timestamp="1591693110415">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
-    <state width="1493" height="187" key="GridCell.Tab.0.center" timestamp="1591547940673">
+    <state width="1493" height="187" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591693110415" />
+    <state width="1493" height="187" key="GridCell.Tab.0.center" timestamp="1591693110414">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
-    <state width="1493" height="187" key="GridCell.Tab.0.left" timestamp="1591547940673">
+    <state width="1493" height="187" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591693110414" />
+    <state width="1493" height="187" key="GridCell.Tab.0.left" timestamp="1591693110414">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
-    <state width="1493" height="187" key="GridCell.Tab.0.right" timestamp="1591547940673">
+    <state width="1493" height="187" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591693110414" />
+    <state width="1493" height="187" key="GridCell.Tab.0.right" timestamp="1591693110415">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591547940673" />
+    <state width="1493" height="187" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591693110415" />
+    <state x="518" y="113" key="RollbackChangesDialog" timestamp="1591692032905">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="518" y="113" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591692032905" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1591547770819">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591547770819" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1591546352695">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1591591627069">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591546352695" />
-    <state x="534" y="146" key="VcsDiffUtil.ChangesDialog" timestamp="1591543778800">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591591627069" />
+    <state x="534" y="146" key="VcsDiffUtil.ChangesDialog" timestamp="1591591605022">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="534" y="146" key="VcsDiffUtil.ChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591543778800" />
+    <state x="534" y="146" key="VcsDiffUtil.ChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591591605022" />
     <state x="631" y="256" key="cloudConfig.SelfSettingsDialog" timestamp="1591456703456">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -348,10 +381,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="481" y="199" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1591457518565" />
-    <state x="558" y="311" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1591543628842">
+    <state x="558" y="311" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1591590582647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="558" y="311" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591543628842" />
+    <state x="558" y="311" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591590582647" />
+    <state x="565" y="251" key="git4idea.ui.GitTagDialog" timestamp="1591590600932">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="565" y="251" key="git4idea.ui.GitTagDialog/0.0.1536.824@0.0.1536.824" timestamp="1591590600932" />
     <state x="532" y="200" key="git4idea.ui.GitUnstashDialog" timestamp="1591547183500">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
