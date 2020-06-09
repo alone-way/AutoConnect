@@ -71,6 +71,9 @@ public class LoginService {
 
             //发送POST请求, 登录校园网
             CloseableHttpResponse response = HttpUtil.doPost(url.toString(), loginFormMap);
+            if(response == null){
+                 return new Message(false, "登录失败!", "POST出现异常");
+            }
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
                 return new Message(true, "登录成功!", "状态码: " + statusCode);
