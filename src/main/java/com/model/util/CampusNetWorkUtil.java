@@ -139,7 +139,7 @@ public class CampusNetWorkUtil {
     }
 
     /**
-     * 连接指定的wifi(若已连接, 则忽略)
+     * 连接指定的wifi(若已连接, 则重新连接)
      *
      * @return 连接成功返回true，否则返回false
      */
@@ -149,23 +149,23 @@ public class CampusNetWorkUtil {
         String cmdConnectWifi = String.format("cmd /c netsh wlan connect name=\"%s\"", wifiName);
 
         try {
-            //检查该wifiName是否已连接, 若已连接直接返回true
-            Process proCheckWifi = Runtime.getRuntime().exec(cmdCheckWifi);
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(proCheckWifi.getInputStream(), "UTF" +
-                    "-8"));) {
-                String oneLine = "";
-                while ((oneLine = reader.readLine()) != null) {
-                    oneLine = oneLine.trim();
-                    if (oneLine.startsWith("SSID")) {
-                        String SSID = oneLine.split(" +")[2];
-//                        System.out.println(wifiName);
-                        if (SSID.equals(wifiName)) {
-//                            System.out.println("wifi已连接");
-                            return new Message(true, "wifi连接成功!", "");
-                        }
-                    }
-                }
-            }
+//            //检查该wifiName是否已连接, 若已连接直接返回true
+//            Process proCheckWifi = Runtime.getRuntime().exec(cmdCheckWifi);
+//            try (BufferedReader reader = new BufferedReader(new InputStreamReader(proCheckWifi.getInputStream(), "UTF" +
+//                    "-8"));) {
+//                String oneLine = "";
+//                while ((oneLine = reader.readLine()) != null) {
+//                    oneLine = oneLine.trim();
+//                    if (oneLine.startsWith("SSID")) {
+//                        String SSID = oneLine.split(" +")[2];
+////                        System.out.println(wifiName);
+//                        if (SSID.equals(wifiName)) {
+////                            System.out.println("wifi已连接");
+//                            return new Message(true, "wifi连接成功!", "");
+//                        }
+//                    }
+//                }
+//            }
 //            System.out.println("wifi未连接, 尝试连接wifi...");
 
             //将wifi配置文件增加到系统
