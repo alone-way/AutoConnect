@@ -27,7 +27,7 @@ public class CampusNetWorkUtil {
     public static boolean isNormalTime() {
         Calendar instance = Calendar.getInstance();
         boolean isNormalTime = true;
-        if (instance.get(Calendar.HOUR_OF_DAY) < 8) {
+        if (instance.get(Calendar.HOUR_OF_DAY) < 7) {
             isNormalTime = false;
         }
         if ((instance.get(Calendar.DAY_OF_WEEK) < 6)) {
@@ -46,39 +46,39 @@ public class CampusNetWorkUtil {
      * 判断目标主机是否可达
      */
     public static boolean isReachable(String ip) {
-        try {
-            Process proPing = Runtime.getRuntime().exec("cmd /c ping " + ip);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(proPing.getInputStream(), "GBk"));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-//                System.out.println(line);
-                if (line.indexOf("TTL") != -1) {
-                    //可以ping通
-                    return true;
-                } else if (line.indexOf("请求超时") != -1 || line.indexOf("无法访问目标主机") != -1 || line.indexOf("一般故障") != -1) {
-                    //为了快速获得结果, 遇到这种情况直接返回false
-                    return false;
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+//        try {
+//            Process proPing = Runtime.getRuntime().exec("cmd /c ping " + ip);
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(proPing.getInputStream(), "GBk"));
+//            String line = "";
+//            while ((line = reader.readLine()) != null) {
+////                System.out.println(line);
+//                if (line.indexOf("TTL") != -1) {
+//                    //可以ping通
+//                    return true;
+//                } else if (line.indexOf("请求超时") != -1 || line.indexOf("无法访问目标主机") != -1 || line.indexOf("一般故障") != -1) {
+//                    //为了快速获得结果, 遇到这种情况直接返回false
+//                    return false;
+//                }
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
 
 
 //        用下面的方法有时会报SocketException, 暂不知啥原因
-//        try {
-//            InetAddress address = InetAddress.getByName(ip);
-//            return address.isReachable(500);
-//
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//            return false;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
+        try {
+            InetAddress address = InetAddress.getByName(ip);
+            return address.isReachable(500);
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
