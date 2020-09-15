@@ -14,6 +14,7 @@ import com.trolltech.qt.gui.QApplication;
  *  TODO: 可以存储多个账户信息
  *  TODO: 解决重定向URL中文乱码问题
  *  TODO: 为什么用Map作为请求主体时会出错?
+ *  TODO:将表单改成从文件读取
  * */
 public class Main {
     public static void main(String[] args) {

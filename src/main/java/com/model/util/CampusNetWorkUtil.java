@@ -7,12 +7,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.URLEncoder;
-import java.net.UnknownHostException;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.*;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -200,5 +196,32 @@ public class CampusNetWorkUtil {
             e.printStackTrace();
             return new Message(false, e.getMessage(), "");
         }
+    }
+
+    /**
+     * 获得无线网卡上的ip (避免获得到本机回环ip和虚拟机ip)
+     */
+    public static String getIp() {
+        try {
+            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = networkInterfaces.nextElement();
+                List<InterfaceAddress> ips = networkInterface.getInterfaceAddresses();
+                for (InterfaceAddress ip : ips) {
+                    if (ip.getNetworkPrefixLength() == 24 && !ip.getAddress().isLoopbackAddress()) {
+                        String ipStr = ip.getAddress().getHostAddress();
+                        if (ipStr.startsWith("10.")) {
+                            return ipStr;
+                        }
+                    }
+                }
+            }
+            throw new RuntimeException("没有找到符合格式的ip");
+
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 }

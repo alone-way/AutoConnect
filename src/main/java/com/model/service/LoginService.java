@@ -55,18 +55,25 @@ public class LoginService {
             //刚连上wifi要等一会儿才能ping通服务器10.1.99.100
             while (count < maxCount && !CampusNetWorkUtil.isReachable("10.1.99.100")) {
                 count++;
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             //若多次ping服务器失败, 直接返回错误消息
             if (count >= maxCount) {
                 return new Message(false, "登录失败!", "校园wifi已连接但无法ping通服务器!");
+
             }
         }
 
         try {
-            String ip = InetAddress.getLocalHost().getHostAddress();
+            String ip = CampusNetWorkUtil.getIp();
+            System.out.println(ip);
             URL url = new URL(String.format(loginUrlFormat, ip, ip));
-            //TODO:将表单改成从文件读取
+
             Map<String, String> loginFormMap = CampusNetWorkUtil.getLoginFormMap(login);
 
             //发送POST请求, 登录校园网
@@ -74,6 +81,7 @@ public class LoginService {
             if(response == null){
                  return new Message(false, "登录失败!", "POST出现异常");
             }
+
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
                 return new Message(true, "登录成功!", "状态码: " + statusCode);
@@ -125,9 +133,6 @@ public class LoginService {
             }
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return new Message(false, "登录失败!", e.getMessage());
-        } catch (UnknownHostException e) {
             e.printStackTrace();
             return new Message(false, "登录失败!", e.getMessage());
         }

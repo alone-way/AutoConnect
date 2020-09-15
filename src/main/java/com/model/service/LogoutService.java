@@ -40,7 +40,8 @@ public class LogoutService {
         }
 
         try {
-            String ip = InetAddress.getLocalHost().getHostAddress();
+            String ip = CampusNetWorkUtil.getIp();
+            System.out.println(ip);
             String url = String.format(logoutUrlFormat, ip);
 
             //发送POST请求, 注销登录
@@ -66,9 +67,6 @@ public class LogoutService {
                 return new Message(false, "注销失败!", "状态码:" + statusCode);
             }
 
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            return new Message(false, "注销失败!", e.getMessage());
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return new Message(false, "注销失败!", e.getMessage());
