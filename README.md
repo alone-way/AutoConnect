@@ -4,7 +4,7 @@
 
 ## 下载
 
-[AutoConnect-1.1.4](https://gitee.com/iIceCube/AutoConnect/attach_files/421390/download)
+[AutoConnect](https://gitee.com/iIceCube/AutoConnect/releases/)
 
 
 
