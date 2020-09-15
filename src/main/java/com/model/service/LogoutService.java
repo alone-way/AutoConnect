@@ -10,6 +10,7 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -41,11 +42,11 @@ public class LogoutService {
 
         try {
             String ip = CampusNetWorkUtil.getIp();
-            System.out.println(ip);
+//            System.out.println(ip);
             String url = String.format(logoutUrlFormat, ip);
 
             //发送POST请求, 注销登录
-            CloseableHttpResponse response = HttpUtil.doPost(url, CampusNetWorkUtil.getLogoutFormMap());
+            CloseableHttpResponse response = HttpUtil.doPost(url, new HashMap<>());
             int statusCode = response.getStatusLine().getStatusCode();
 
             if (statusCode == 200) {

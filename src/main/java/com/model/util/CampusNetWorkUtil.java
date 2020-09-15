@@ -107,32 +107,33 @@ public class CampusNetWorkUtil {
         return params;
     }
 
-    /**
-     * 获得用于注销的表单映射
-     */
-    public static Map<String, String> getLogoutFormMap() {
-        Map<String, String> params = new HashMap<>();
+//    /**
+//     * 获得用于注销的表单映射
+//     */
+//    public static Map<String, String> getLogoutFormMap() {
+//        Map<String, String> params = new HashMap<>();
+//        return params;
 
-        params.put("c", "ACSetting");
-        params.put("a", "Logout");
-        try {
-            params.put("wlanuserip", InetAddress.getLocalHost().getHostAddress());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        params.put("wlanacip", "10.1.1.1");
-        params.put("wlanacname", "%26%23230%3B%26%23187%3B%A1%A7%26%23230%3B%A1%C0%26%23159%3B%26%23229%3B-|%A8%A6%26" +
-                "%23153%3B%A1%E9%26%23230%3B%A6%CC%26%23139%3B%A8%A8%A1%A5%26%23149%3B");
-        params.put("port", null);
-        params.put("hostname", "10.1.99.100");
-        params.put("iTermType", "1");
-        params.put("session", null);
-        params.put("queryACIP", "0");
-        params.put("mac", "00-00-00-00-00-00");
-        params.put("jsVersion", "2.4.3");
+//        params.put("c", "ACSetting");
+//        params.put("a", "Logout");
+//        try {
+//            params.put("wlanuserip", InetAddress.getLocalHost().getHostAddress());
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        }
+//        params.put("wlanacip", "10.1.1.1");
+//        params.put("wlanacname", "%26%23230%3B%26%23187%3B%A1%A7%26%23230%3B%A1%C0%26%23159%3B%26%23229%3B-|%A8%A6%26" +
+//                "%23153%3B%A1%E9%26%23230%3B%A6%CC%26%23139%3B%A8%A8%A1%A5%26%23149%3B");
+//        params.put("port", null);
+//        params.put("hostname", "10.1.99.100");
+//        params.put("iTermType", "1");
+//        params.put("session", null);
+//        params.put("queryACIP", "0");
+//        params.put("mac", "00-00-00-00-00-00");
+//        params.put("jsVersion", "2.4.3");
 
-        return params;
-    }
+//        return params;
+//    }
 
     /**
      * 连接指定的wifi(若已连接, 则重新连接)

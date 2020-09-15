@@ -71,7 +71,7 @@ public class LoginService {
 
         try {
             String ip = CampusNetWorkUtil.getIp();
-            System.out.println(ip);
+//            System.out.println(ip);
             URL url = new URL(String.format(loginUrlFormat, ip, ip));
 
             Map<String, String> loginFormMap = CampusNetWorkUtil.getLoginFormMap(login);
