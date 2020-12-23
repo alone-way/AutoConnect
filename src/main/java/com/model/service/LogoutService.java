@@ -31,9 +31,9 @@ public class LogoutService {
      */
     public Message logout() {
         //检查是否处于断网时间
-        if (!CampusNetWorkUtil.isNormalTime()) {
-            return new Message(false, "注销失败!", "处于断网时间!");
-        }
+//        if (!CampusNetWorkUtil.isNormalTime()) {
+//            return new Message(false, "注销失败!", "处于断网时间!");
+//        }
 
         //检查是否能ping通校园网服务器
         if (!CampusNetWorkUtil.isReachable("10.1.99.100")) {

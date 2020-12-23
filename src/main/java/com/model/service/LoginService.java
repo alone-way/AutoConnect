@@ -37,7 +37,7 @@ public class LoginService {
         }
 
         //检查是否处于断网时间
-        if (!CampusNetWorkUtil.isNormalTime()) {
+        if (!Login.BINJIANG_COLLEGE.equals(login.getIsp()) && !CampusNetWorkUtil.isNormalTime()) {
             return new Message(false, "登录失败!", "处于断网时间!");
         }
 
@@ -78,8 +78,8 @@ public class LoginService {
 
             //发送POST请求, 登录校园网
             CloseableHttpResponse response = HttpUtil.doPost(url.toString(), loginFormMap);
-            if(response == null){
-                 return new Message(false, "登录失败!", "POST出现异常");
+            if (response == null) {
+                return new Message(false, "登录失败!", "POST出现异常");
             }
 
             int statusCode = response.getStatusLine().getStatusCode();

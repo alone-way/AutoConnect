@@ -80,7 +80,7 @@ public class Login implements Serializable {
     }
 
     public int getIspIndex() {
-        if (isp == null || isp.equals(""))
+        if (isp == null)
             return 0;
         switch (isp) {
             case CHINA_TELECOM:

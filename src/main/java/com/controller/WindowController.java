@@ -8,7 +8,6 @@ import com.model.service.LoginTask;
 import com.model.service.LogoutService;
 import com.model.service.LogoutTask;
 import com.model.util.SystemUtil;
-import com.trolltech.qt.core.QModelIndex;
 import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.gui.*;
 import com.view.ComboItemWidget;
@@ -29,7 +28,6 @@ public class WindowController extends QObject {
     private LoginService loginService = new LoginService();
     private LogoutService logoutService = new LogoutService();
     private int loginCount = 0; //连续登录次数
-    private int maxLoginCount = 3; //最大连续登录次数, 超过该次数就不再尝试自动登录
 
     public WindowController() {
         Ui_LoginWindow ui = loginWindow.getUi();
@@ -68,27 +66,33 @@ public class WindowController extends QObject {
         Ui_LoginWindow ui = loginWindow.getUi();
         QListWidget listWidget = loginWindow.getListWidget();
         try (ObjectInputStream in =
-                     new ObjectInputStream(new BufferedInputStream(new FileInputStream("loginData.txt")));) {
+                     new ObjectInputStream(new BufferedInputStream(new FileInputStream("loginData.txt")))) {
             //设置窗口信息
             ui.cb_autoLogin.setChecked(in.readBoolean());
             ui.cb_autoStart.setChecked(in.readBoolean());
 
             boolean isFirst = true;
             //读取登录账户信息
-            List<Login> loginList = (List<Login>) in.readObject();
-            for (Login login : loginList) {
-                QListWidgetItem item = new QListWidgetItem(listWidget);
-                ComboItemWidget widget = new ComboItemWidget(login, listWidget);
-                listWidget.setItemWidget(item, widget);
-                widget.getPb_delete().clicked.connect(this, "clicked_on_pb_delete()");
-                //将读取到的第一个账户的信息显示到窗口上
-                if (isFirst) {
-                    ui.combo_id.setEditText(login.getId());
-                    ui.le_password.setText(login.getPassword());
-                    ui.combo_isp.setCurrentIndex(login.getIspIndex());
-                    isFirst = false;
+            List<?> loginList;
+            Object obj = in.readObject();
+            if (obj instanceof List<?>) {
+                loginList = (List<?>) obj;
+                for (Object o : loginList) {
+                    Login login = (Login) o;
+                    QListWidgetItem item = new QListWidgetItem(listWidget);
+                    ComboItemWidget widget = new ComboItemWidget(login, listWidget);
+                    listWidget.setItemWidget(item, widget);
+                    widget.getPb_delete().clicked.connect(this, "clicked_on_pb_delete()");
+                    //将读取到的第一个账户的信息显示到窗口上
+                    if (isFirst) {
+                        ui.combo_id.setEditText(login.getId());
+                        ui.le_password.setText(login.getPassword());
+                        ui.combo_isp.setCurrentIndex(login.getIspIndex());
+                        isFirst = false;
+                    }
                 }
             }
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -108,7 +112,7 @@ public class WindowController extends QObject {
         QListWidget listWidget = loginWindow.getListWidget();
 
         try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(
-                "loginData.txt")));) {
+                "loginData.txt")))) {
             //保存窗口信息
             out.writeBoolean(ui.cb_autoLogin.isChecked());
             out.writeBoolean(ui.cb_autoStart.isChecked());
@@ -271,14 +275,11 @@ public class WindowController extends QObject {
             int closeMills = 15000; //表示过多久自动关闭程序
             loginCount = 0; //连续登录次数置0
 
-            Runnable closeTask = new Runnable() {
-                @Override
-                public void run() {
-                    if (loginWindow.isHidden()) {
-                        loginWindow.close();
-                    } else {
-                        loginWindow.showMessage("自动关闭已取消", "");
-                    }
+            Runnable closeTask = () -> {
+                if (loginWindow.isHidden()) {
+                    loginWindow.close();
+                } else {
+                    loginWindow.showMessage("自动关闭已取消", "");
                 }
             };
             //closeSeconds后关闭程序
@@ -287,6 +288,8 @@ public class WindowController extends QObject {
             loginWindow.showMessage(message.getTitle(), "程序将在" + closeMills / 1000 + "后关闭...");
 
         } else {
+            //最大连续登录次数, 超过该次数就不再尝试自动登录
+            int maxLoginCount = 3;
             if (loginCount >= maxLoginCount) {
                 //连续maxLoginCount次登录失败, 就停止登录
                 loginWindow.showMessage(message.getTitle(), message.getText());
